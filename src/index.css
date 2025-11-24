@@ -21,9 +21,9 @@
 
 .app-header svg {
   /* Set the size of your logo */
-  width: 20px;
-  height: 20px;
-  margin-right: 6px;
+  width: 10px;
+  height: 10px;
+  margin-right: 2px;
   /* Small space between logo and title */
 
   /* Nudge the logo slightly to the left (negative x value) or right (positive x value) */
