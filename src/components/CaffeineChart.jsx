@@ -31,8 +31,11 @@ const CaffeineChart = ({ drinks }) => {
     const currentTimeData = new Array(labels.length).fill(null);
     // Find the closest index to current time
     const closestIndex = Math.round(currentTimeIndex);
+    console.log('Current time index:', currentTimeIndex, 'Closest index:', closestIndex, 'Current level:', currentLevel);
+
+    // Always set the current level, even if it's 0
     if (closestIndex >= 0 && closestIndex < labels.length) {
-        currentTimeData[closestIndex] = currentLevel;
+        currentTimeData[closestIndex] = data[closestIndex]; // Use the data point from the main dataset
     }
 
     const chartData = {
@@ -46,6 +49,7 @@ const CaffeineChart = ({ drinks }) => {
                 tension: 0.4,
                 fill: true,
                 pointRadius: 3,
+                order: 2,
             },
             {
                 label: 'Current Time',
@@ -55,6 +59,7 @@ const CaffeineChart = ({ drinks }) => {
                 pointRadius: 8,
                 pointHoverRadius: 10,
                 showLine: false,
+                order: 1, // Render on top
             },
         ],
     };
