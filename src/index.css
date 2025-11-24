@@ -19,23 +19,6 @@
   /* The mb-4 class already handles margin-bottom */
 }
 
-.app-header svg {
-  /* Set the size of your logo */
-  width: 20px !important;
-  height: 20px !important;
-  margin-right: 2px;
-  align-items: center !important;
-  justify-content: center !important;
-  /* Small space between logo and title */
-
-  /* Nudge the logo slightly to the left (negative x value) or right (positive x value) */
-  /* Try -5px first, then adjust. */
-  transform: translateX(10px) !important;
-
-  /* --- OPTIONAL GLOW EFFECT --- */
-  /* This uses your accent color for a subtle "pop" */
-  filter: drop-shadow(0 0 5px var(--accent-color));
-}
 
 .app-title {
   /* Ensure the H1 is centered with the logo and looks like a title */
