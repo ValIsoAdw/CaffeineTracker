@@ -28,7 +28,7 @@
 
   /* Nudge the logo slightly to the left (negative x value) or right (positive x value) */
   /* Try -5px first, then adjust. */
-  transform: translateX(5px);
+  transform: translateX(10px);
 
   /* --- OPTIONAL GLOW EFFECT --- */
   /* This uses your accent color for a subtle "pop" */
