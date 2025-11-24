@@ -21,14 +21,14 @@
 
 .app-header svg {
   /* Set the size of your logo */
-  width: 20px;
-  height: 20px;
+  width: 20px !important;
+  height: 20px !important;
   margin-right: 2px;
   /* Small space between logo and title */
 
   /* Nudge the logo slightly to the left (negative x value) or right (positive x value) */
   /* Try -5px first, then adjust. */
-  transform: translateX(10px);
+  transform: translateX(10px) !important;
 
   /* --- OPTIONAL GLOW EFFECT --- */
   /* This uses your accent color for a subtle "pop" */
