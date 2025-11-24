@@ -3,6 +3,7 @@ import AddDrink from './components/AddDrink';
 import Status from './components/Status';
 import CaffeineChart from './components/CaffeineChart';
 import CustomDrinkManager from './components/CustomDrinkManager';
+import DrinkHistory from './components/DrinkHistory';
 import { calculateTotalLevel } from './utils/caffeine';
 
 function App() {
@@ -28,6 +29,10 @@ function App() {
     setDrinks(prev => [...prev, drink].sort((a, b) => new Date(a.time) - new Date(b.time)));
   };
 
+  const deleteDrink = (id) => {
+    setDrinks(prev => prev.filter(drink => drink.id !== id));
+  };
+
   const currentLevel = calculateTotalLevel(drinks, currentTime);
 
   return (
@@ -35,6 +40,8 @@ function App() {
       <h1 className="text-center">Caffeine Tracker</h1>
 
       <Status currentLevel={currentLevel} />
+
+      <DrinkHistory drinks={drinks} onDelete={deleteDrink} />
 
       <CaffeineChart drinks={drinks} />
 
