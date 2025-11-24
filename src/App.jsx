@@ -38,10 +38,10 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1 className="text-center">Caffeine Tracker</h1>
-
-
-      <CustomLogo />
+      <div className="app-header">
+        <h1 className="app-title">Caffeine Tracker</h1>
+        <CustomLogo className="logo" />
+      </div>
       <CaffeineChart drinks={drinks} />
 
       <Status currentLevel={currentLevel} />

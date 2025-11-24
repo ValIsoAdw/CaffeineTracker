@@ -1,7 +1,7 @@
 import React from 'react';
 
-const CustomLogo = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="200" width="200">
+const CustomLogo = ({ className }) => (
+    <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="200" width="200">
         <defs>
             {/* Gradients */}
             <linearGradient id="cupGradient" x1="0%" y1="0%" x2="100%" y2="0%">
