@@ -6,7 +6,7 @@ import CustomDrinkManager from './components/CustomDrinkManager';
 import DrinkHistory from './components/DrinkHistory';
 
 import { calculateTotalLevel } from './utils/caffeine';
-
+import CustomLogo from './components/CustomLogo';
 function App() {
   const [drinks, setDrinks] = useState(() => {
     const saved = localStorage.getItem('caffeine-drinks');
@@ -41,9 +41,10 @@ function App() {
       <h1 className="text-center">Caffeine Tracker</h1>
 
 
-      <Status currentLevel={currentLevel} />
-
+      <CustomLogo />
       <CaffeineChart drinks={drinks} />
+
+      <Status currentLevel={currentLevel} />
 
       <DrinkHistory drinks={drinks} onDelete={deleteDrink} />
 

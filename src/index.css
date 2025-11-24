@@ -10,6 +10,35 @@
   --font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+/* --- Header Styling for CustomLogo and H1 --- */
+.app-header {
+  /* Use Flexbox for easy centering and alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* The mb-4 class already handles margin-bottom */
+}
+
+.app-header svg {
+  /* Set the size of your logo */
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+  /* Small space between logo and title */
+
+  /* --- OPTIONAL GLOW EFFECT --- */
+  /* This uses your accent color for a subtle "pop" */
+  filter: drop-shadow(0 0 5px var(--accent-color));
+}
+
+.app-title {
+  /* Ensure the H1 is centered with the logo and looks like a title */
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
 body {
   margin: 0;
   padding: 0;
