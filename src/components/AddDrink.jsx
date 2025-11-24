@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const DRINK_TYPES = [
+const DEFAULT_DRINKS = [
     { name: 'Coffee (Cup)', amount: 95 },
     { name: 'Espresso (Shot)', amount: 63 },
     { name: 'Tea (Cup)', amount: 26 },
@@ -10,16 +10,71 @@ const DRINK_TYPES = [
 ];
 
 const AddDrink = ({ onAdd }) => {
-    const [selectedDrink, setSelectedDrink] = useState(DRINK_TYPES[0].name);
-    const [amount, setAmount] = useState(DRINK_TYPES[0].amount);
+    const [customDrinks, setCustomDrinks] = useState([]);
+    const [allDrinks, setAllDrinks] = useState(DEFAULT_DRINKS);
+    const [selectedDrink, setSelectedDrink] = useState(DEFAULT_DRINKS[0].name);
+    const [amount, setAmount] = useState(DEFAULT_DRINKS[0].amount);
+    const [volume, setVolume] = useState(200); // Default 200ml
     const [time, setTime] = useState('');
+    const [isCustomDrink, setIsCustomDrink] = useState(false);
+
+    // Load custom drinks from localStorage
+    useEffect(() => {
+        const loadCustomDrinks = () => {
+            const saved = localStorage.getItem('caffeine-custom-drinks');
+            const customs = saved ? JSON.parse(saved) : [];
+            setCustomDrinks(customs);
+
+            // Merge default and custom drinks
+            const merged = [
+                ...DEFAULT_DRINKS.slice(0, -1), // All except "Custom"
+                ...customs.map(d => ({
+                    name: d.name,
+                    amount: 0,
+                    caffeinePerHundredMl: d.caffeinePerHundredMl,
+                    isCustom: true
+                })),
+                DEFAULT_DRINKS[DEFAULT_DRINKS.length - 1], // "Custom" at the end
+            ];
+            setAllDrinks(merged);
+        };
+
+        loadCustomDrinks();
+
+        // Listen for changes to custom drinks
+        const handleCustomDrinksChanged = () => loadCustomDrinks();
+        window.addEventListener('customDrinksChanged', handleCustomDrinksChanged);
+        return () => window.removeEventListener('customDrinksChanged', handleCustomDrinksChanged);
+    }, []);
 
     const handleDrinkChange = (e) => {
         const name = e.target.value;
         setSelectedDrink(name);
-        const drink = DRINK_TYPES.find(d => d.name === name);
+        const drink = allDrinks.find(d => d.name === name);
         if (drink) {
-            setAmount(drink.amount); // This will set it to 0 for Custom
+            if (drink.isCustom) {
+                setIsCustomDrink(true);
+                // Calculate caffeine based on volume
+                const calculatedAmount = (volume / 100) * drink.caffeinePerHundredMl;
+                setAmount(Math.round(calculatedAmount));
+            } else {
+                setIsCustomDrink(false);
+                setAmount(drink.amount); // This will set it to 0 for "Custom"
+            }
+        }
+    };
+
+    const handleVolumeChange = (e) => {
+        const newVolume = e.target.value;
+        setVolume(newVolume);
+
+        // Recalculate caffeine if it's a custom drink
+        if (isCustomDrink) {
+            const drink = allDrinks.find(d => d.name === selectedDrink);
+            if (drink && drink.caffeinePerHundredMl) {
+                const calculatedAmount = (newVolume / 100) * drink.caffeinePerHundredMl;
+                setAmount(Math.round(calculatedAmount));
+            }
         }
     };
 
@@ -41,7 +96,7 @@ const AddDrink = ({ onAdd }) => {
             time: new Date(time).toISOString(),
         });
 
-        // Reset form slightly but keep time or clear it? Let's clear it.
+        // Reset form
         setTime('');
     };
 
@@ -52,19 +107,36 @@ const AddDrink = ({ onAdd }) => {
                 <div className="mb-4">
                     <label>Drink Type</label>
                     <select value={selectedDrink} onChange={handleDrinkChange}>
-                        {DRINK_TYPES.map(d => (
-                            <option key={d.name} value={d.name}>{d.name}</option>
+                        {allDrinks.map(d => (
+                            <option key={d.name} value={d.name}>
+                                {d.name}
+                                {d.isCustom && ` (${d.caffeinePerHundredMl} mg/100ml)`}
+                            </option>
                         ))}
                     </select>
                 </div>
 
+                {isCustomDrink && (
+                    <div className="mb-4">
+                        <label>Volume (ml)</label>
+                        <input
+                            type="number"
+                            value={volume}
+                            onChange={handleVolumeChange}
+                            min="0"
+                            step="10"
+                        />
+                    </div>
+                )}
+
                 <div className="mb-4">
-                    <label>Amount (mg)</label>
+                    <label>Caffeine Amount (mg)</label>
                     <input
                         type="number"
                         value={amount}
                         onChange={(e) => setAmount(e.target.value)}
                         min="0"
+                        disabled={isCustomDrink}
                     />
                 </div>
 

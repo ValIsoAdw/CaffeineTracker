@@ -29,7 +29,9 @@ body {
   padding: 1rem;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin: 0 0 1rem 0;
   font-weight: 700;
 }
@@ -49,7 +51,8 @@ button:hover {
   opacity: 0.9;
 }
 
-input, select {
+input,
+select {
   background-color: var(--card-bg);
   border: 1px solid #334155;
   color: var(--text-primary);
@@ -61,7 +64,8 @@ input, select {
   margin-bottom: 1rem;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   outline: 2px solid var(--accent-color);
   border-color: transparent;
 }
@@ -97,4 +101,44 @@ input:focus, select:focus {
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.custom-drink-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-drink-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #0f172a;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #334155;
+}
+
+.custom-drink-item:hover {
+  background-color: #1a2332;
+}
+
+.btn-delete {
+  background-color: var(--danger-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 6px;
+  min-width: 32px;
+}
+
+.btn-delete:hover {
+  background-color: #dc2626;
+}
+
+input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

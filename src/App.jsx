@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddDrink from './components/AddDrink';
 import Status from './components/Status';
 import CaffeineChart from './components/CaffeineChart';
+import CustomDrinkManager from './components/CustomDrinkManager';
 import { calculateTotalLevel } from './utils/caffeine';
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
       <CaffeineChart drinks={drinks} />
 
       <AddDrink onAdd={addDrink} />
+
+      <CustomDrinkManager />
 
       <div className="text-center" style={{ marginTop: '2rem', color: '#64748b', fontSize: '0.8rem' }}>
         <p>Based on a 5-hour half-life formula.</p>
