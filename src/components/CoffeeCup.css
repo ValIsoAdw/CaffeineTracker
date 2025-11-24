@@ -1,0 +1,12 @@
+/* CoffeeCup.css */
+.coffee-cup {
+    width: 80px;
+    margin: 0 auto 1rem auto;
+    /* center and add spacing below */
+    display: block;
+}
+
+.coffee-cup svg {
+    width: 100%;
+    height: auto;
+}

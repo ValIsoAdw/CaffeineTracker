@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CoffeeCup from './CoffeeCup';
 
 // Default drink options – now include caffeine per 100 ml for accurate custom calculations
 const DEFAULT_DRINKS = [
@@ -87,6 +88,7 @@ const AddDrink = ({ onAdd }) => {
     return (
         <div className="card">
             <h2>Add Caffeine</h2>
+            <CoffeeCup volume={volume} />
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                     <label>Drink Type</label>
