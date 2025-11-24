@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 import AddDrink from './components/AddDrink';
 import Status from './components/Status';
 import CaffeineChart from './components/CaffeineChart';
