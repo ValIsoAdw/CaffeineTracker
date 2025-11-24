@@ -10,23 +10,7 @@
   --font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-/* --- Header Styling for CustomLogo and H1 --- */
-.app-header {
-  /* Use Flexbox for easy centering and alignment */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* The mb-4 class already handles margin-bottom */
-}
 
-
-.app-title {
-  /* Ensure the H1 is centered with the logo and looks like a title */
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
 
 body {
   margin: 0;
@@ -45,6 +29,26 @@ body {
   width: 100%;
   max-width: 600px;
   padding: 1rem;
+
+  margin: 0 auto;
+}
+
+/* --- Header Styling for CustomLogo and H1 --- */
+.app-header {
+  /* Use Flexbox for easy centering and alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* The mb-4 class already handles margin-bottom */
+}
+
+
+.app-title {
+  /* Ensure the H1 is centered with the logo and looks like a title */
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 h1,
