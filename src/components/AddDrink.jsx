@@ -109,7 +109,7 @@ const AddDrink = ({ onAdd }) => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label>Caffeine amount (mg)</label>
+                    <label>Caffeine amount (mg) / 100 ml</label>
                     <input
                         type="number"
                         value={caffeinePerHundredMl}
