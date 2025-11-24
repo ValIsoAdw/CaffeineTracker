@@ -25,7 +25,15 @@ ChartJS.register(
 );
 
 const CaffeineChart = ({ drinks }) => {
-    const { labels, data } = getChartData(drinks);
+    const { labels, data, currentTimeIndex, currentLevel } = getChartData(drinks);
+
+    // Create array with null values except at current time position
+    const currentTimeData = new Array(labels.length).fill(null);
+    // Find the closest index to current time
+    const closestIndex = Math.round(currentTimeIndex);
+    if (closestIndex >= 0 && closestIndex < labels.length) {
+        currentTimeData[closestIndex] = currentLevel;
+    }
 
     const chartData = {
         labels,
@@ -37,6 +45,16 @@ const CaffeineChart = ({ drinks }) => {
                 backgroundColor: 'rgba(56, 189, 248, 0.2)',
                 tension: 0.4,
                 fill: true,
+                pointRadius: 3,
+            },
+            {
+                label: 'Current Time',
+                data: currentTimeData,
+                borderColor: '#ef4444',
+                backgroundColor: '#ef4444',
+                pointRadius: 8,
+                pointHoverRadius: 10,
+                showLine: false,
             },
         ],
     };
