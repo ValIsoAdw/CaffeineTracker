@@ -4,7 +4,7 @@ import Status from './components/Status';
 import CaffeineChart from './components/CaffeineChart';
 import CustomDrinkManager from './components/CustomDrinkManager';
 import DrinkHistory from './components/DrinkHistory';
-import CoffeeCup from './components/CoffeeCup';
+
 import { calculateTotalLevel } from './utils/caffeine';
 
 function App() {
@@ -39,13 +39,13 @@ function App() {
   return (
     <div className="app-container">
       <h1 className="text-center">Caffeine Tracker</h1>
-      <CoffeeCup volume={200} />
+
 
       <Status currentLevel={currentLevel} />
 
-      <DrinkHistory drinks={drinks} onDelete={deleteDrink} />
-
       <CaffeineChart drinks={drinks} />
+
+      <DrinkHistory drinks={drinks} onDelete={deleteDrink} />
 
       <AddDrink onAdd={addDrink} />
 
