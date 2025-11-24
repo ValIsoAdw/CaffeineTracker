@@ -80,20 +80,26 @@ const AddDrink = ({ onAdd }) => {
 
     const setNow = () => {
         const now = new Date();
-        // Format for datetime-local input: YYYY-MM-DDTHH:mm
-        const localIsoString = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
-        setTime(localIsoString);
+        // Format for time input: HH:mm
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        setTime(`${hours}:${minutes}`);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!amount || !time) return;
 
+        // Combine today's date with the selected time
+        const [hours, minutes] = time.split(':');
+        const now = new Date();
+        const drinkTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hours), parseInt(minutes));
+
         onAdd({
             id: Date.now(),
             name: selectedDrink,
             amount: parseInt(amount),
-            time: new Date(time).toISOString(),
+            time: drinkTime.toISOString(),
         });
 
         // Reset form
@@ -144,7 +150,7 @@ const AddDrink = ({ onAdd }) => {
                     <label>Time</label>
                     <div className="flex-row">
                         <input
-                            type="datetime-local"
+                            type="time"
                             value={time}
                             onChange={(e) => setTime(e.target.value)}
                         />
