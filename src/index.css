@@ -24,8 +24,8 @@
   width: 20px !important;
   height: 20px !important;
   margin-right: 2px;
-  align-items: center;
-  justify-content: center;
+  align-items: center !important;
+  justify-content: center !important;
   /* Small space between logo and title */
 
   /* Nudge the logo slightly to the left (negative x value) or right (positive x value) */
