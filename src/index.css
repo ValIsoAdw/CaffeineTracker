@@ -26,6 +26,10 @@
   margin-right: 6px;
   /* Small space between logo and title */
 
+  /* Nudge the logo slightly to the left (negative x value) or right (positive x value) */
+  /* Try -5px first, then adjust. */
+  transform: translateX(5px);
+
   /* --- OPTIONAL GLOW EFFECT --- */
   /* This uses your accent color for a subtle "pop" */
   filter: drop-shadow(0 0 5px var(--accent-color));
