@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-// Default drink options – now include caffeine per 100 ml for accurate custom calculations
+// Default drink options – now include caffeine per 100 ml for accurate custom calculations
 const DEFAULT_DRINKS = [
-    { name: 'Coffee (Cup)', amount: 95, caffeinePerHundredMl: 80 },
-    { name: 'Espresso (Shot)', amount: 63, caffeinePerHundredMl: 210 },
-    { name: 'Tea (Cup)', amount: 26, caffeinePerHundredMl: 11 },
-    { name: 'Soda (Can)', amount: 40, caffeinePerHundredMl: 11 },
-    { name: 'Energy Drink (Can)', amount: 80, caffeinePerHundredMl: 32 },
+    { name: 'Coffee', amount: 95, caffeinePerHundredMl: 80 },
+    { name: 'Espresso (standard 30 ml)', amount: 63, caffeinePerHundredMl: 210 },
+    { name: 'Tea', amount: 26, caffeinePerHundredMl: 11 },
+    { name: 'Soda', amount: 55, caffeinePerHundredMl: 11 },
+    { name: 'Energy Drink', amount: 100, caffeinePerHundredMl: 32 },
     { name: 'Custom', amount: 0, caffeinePerHundredMl: 0 },
 ];
 
@@ -14,8 +14,8 @@ const AddDrink = ({ onAdd }) => {
     const [customDrinks, setCustomDrinks] = useState([]);
     const [allDrinks, setAllDrinks] = useState(DEFAULT_DRINKS);
     const [selectedDrink, setSelectedDrink] = useState(DEFAULT_DRINKS[0].name);
-    const [amount, setAmount] = useState(DEFAULT_DRINKS[0].amount);
-    const [volume, setVolume] = useState(200); // Default 200 ml for custom drinks
+    const [caffeinePerHundredMl, setCaffeinePerHundredMl] = useState(DEFAULT_DRINKS[0].caffeinePerHundredMl);
+    const [volume, setVolume] = useState(200); // Default 200 ml
     const [time, setTime] = useState('');
     const [isCustomDrink, setIsCustomDrink] = useState(false);
 
@@ -49,25 +49,13 @@ const AddDrink = ({ onAdd }) => {
         const drink = allDrinks.find(d => d.name === name);
         if (drink) {
             setIsCustomDrink(drink.isCustom || false);
-            // Calculate caffeine based on volume and caffeinePerHundredMl
-            if (drink.caffeinePerHundredMl > 0) {
-                const calculatedAmount = (volume / 100) * drink.caffeinePerHundredMl;
-                setAmount(Math.round(calculatedAmount));
-            } else {
-                setAmount(drink.amount);
-            }
+            setCaffeinePerHundredMl(drink.caffeinePerHundredMl);
         }
     };
 
     const handleVolumeChange = e => {
         const newVolume = e.target.value;
         setVolume(newVolume);
-        // Recalculate caffeine for any drink with caffeinePerHundredMl
-        const drink = allDrinks.find(d => d.name === selectedDrink);
-        if (drink && drink.caffeinePerHundredMl > 0) {
-            const calculatedAmount = (newVolume / 100) * drink.caffeinePerHundredMl;
-            setAmount(Math.round(calculatedAmount));
-        }
     };
 
     const setNow = () => {
@@ -79,14 +67,18 @@ const AddDrink = ({ onAdd }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (!amount || !time) return;
+        if (!caffeinePerHundredMl || !volume || !time) return;
+
+        // Calculate total caffeine amount from concentration and volume
+        const totalCaffeine = Math.round((volume / 100) * caffeinePerHundredMl);
+
         const [hours, minutes] = time.split(':');
         const now = new Date();
         const drinkTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), parseInt(hours), parseInt(minutes));
         onAdd({
             id: Date.now(),
             name: selectedDrink,
-            amount: parseInt(amount),
+            amount: totalCaffeine,
             time: drinkTime.toISOString(),
         });
         setTime('');
@@ -117,13 +109,17 @@ const AddDrink = ({ onAdd }) => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label>Caffeine Amount (mg)</label>
+                    <label>Caffeine (mg/100ml)</label>
                     <input
                         type="number"
-                        value={amount}
-                        onChange={e => setAmount(e.target.value)}
+                        value={caffeinePerHundredMl}
+                        onChange={e => setCaffeinePerHundredMl(e.target.value)}
                         min="0"
+                        step="1"
                     />
+                </div>
+                <div className="mb-4">
+                    <label>Total Caffeine: {Math.round((volume / 100) * caffeinePerHundredMl)} mg</label>
                 </div>
                 <div className="mb-4">
                     <label>Time</label>
