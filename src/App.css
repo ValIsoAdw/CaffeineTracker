@@ -6,8 +6,12 @@
 }
 
 .logo {
-  height: 2em;
-  padding: 0;
+  height: 20px !important;
+  /* Use desired size */
+  width: 20px !important;
+  /* Add width for aspect ratio control */
+  padding: 0 !important;
+  /* Remove the huge padding */
   will-change: filter;
   transition: filter 300ms;
 }
