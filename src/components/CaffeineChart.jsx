@@ -31,7 +31,6 @@ const CaffeineChart = ({ drinks }) => {
     const currentTimeData = new Array(labels.length).fill(null);
     // Find the closest index to current time
     const closestIndex = Math.round(currentTimeIndex);
-    console.log('Current time index:', currentTimeIndex, 'Closest index:', closestIndex, 'Current level:', currentLevel);
 
     // Always set the current level, even if it's 0
     if (closestIndex >= 0 && closestIndex < labels.length) {
