@@ -4,7 +4,7 @@ const Status = ({ currentLevel }) => {
     // Determine color based on level (arbitrary thresholds)
     let color = '#22c55e'; // Green
     if (currentLevel > 100) color = '#eab308'; // Yellow
-    if (currentLevel > 300) color = '#ef4444'; // Red
+    if (currentLevel > 400) color = '#ef4444'; // Red
 
     return (
         <div className="card text-center">
