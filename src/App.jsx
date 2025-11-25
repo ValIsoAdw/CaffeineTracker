@@ -54,7 +54,7 @@ function App() {
       <CustomDrinkManager />
 
       <div className="text-center" style={{ marginTop: '2rem', color: '#64748b', fontSize: '0.8rem' }}>
-        <p>Based on a 5-hour half-life formula.</p>
+        <p>Based on a 5-hour half-life formula (clears after 12h).</p>
       </div>
     </div>
   );

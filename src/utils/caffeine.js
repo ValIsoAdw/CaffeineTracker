@@ -2,6 +2,7 @@ export const HALF_LIFE_HOURS = 5;
 
 export const calculateRemaining = (amount, timeElapsedHours, halfLife = HALF_LIFE_HOURS) => {
   if (timeElapsedHours < 0) return 0; // Future drink
+  if (timeElapsedHours > 12) return 0; // Zero after 12 hours
   return amount * Math.pow(0.5, timeElapsedHours / halfLife);
 };
 
